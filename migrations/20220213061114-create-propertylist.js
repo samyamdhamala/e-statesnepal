@@ -16,38 +16,52 @@ module.exports = {
       }
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       description: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       streetaddress: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       city: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       province: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       area: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       type: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       status: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       latitude: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       longitude: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       price:{
         type:Sequelize.FLOAT,
         allowNull:false,
+      },
+      image: {
+        allowNull: false,
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

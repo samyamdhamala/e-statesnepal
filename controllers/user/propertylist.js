@@ -4,13 +4,17 @@ const Sequelize = require("sequelize");
 
 const moment = require("moment");
 
+//for image upoload
+const multer = require('multer');
+const path = require('path');
+
 const {sequelize,propertylist}=require("../../models");
 const customer = require('../../models/customer');
 
 const postProperty= async (req,res)=>{
        try{
          console.log(req.body);
-           const reqObj={customer_id:req.decoded.id,...req.body};
+           const reqObj={customer_id:req.decoded.id,image:req.files.path,...req.body};
 
            const newPropertyList = await propertylist.create(
             reqObj
@@ -92,4 +96,31 @@ const getAllProperty = async (req,res)=>{
   }
 }
 
-module.exports = {postProperty,getAllProperty,getProperty};
+//upload image controller
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'images');
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '--'+ file.originalname);
+    
+}
+});
+
+const upload = multer({
+    storage: storage,
+  limits: {fileSize: '1000000'},
+    fileFilter: (req, file, cb) => {
+        const fileTypes = /jpeg|jpg|png/;
+        const mimeType = fileTypes.test(file.mimetype);
+        const extname = fileTypes.test(path.extname(file.originalname))
+
+        if (mimeType && extname) {
+            return cb(null, true);
+        }
+        cb("Error: Images Only!");
+    }
+}).array('image',5);
+
+module.exports = {postProperty,getAllProperty,getProperty,upload};
+
