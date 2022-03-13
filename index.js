@@ -26,13 +26,12 @@ app.use((req,res,next)=>{
     if (token){
         jwt.verify(token,process.env.SECRET,(err,decoded)=>{
             if (err){
-                res.status(403),json({
+                res.status(403).json({
                     success:false,
                     message:"Invalid Token supplied"
                 })
             }else{
                 req.decoded=decoded;
-                console.log(decoded);
                 next();
             }
         })
