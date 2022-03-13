@@ -9,9 +9,14 @@ require("dotenv").config({path:"./.env"});
 const userloginRoute = require('./routes/user/login');
 const userregisterRoute = require('./routes/user/register');
 
+
+//middleware
+
 app.use(bodyParser.urlencoded({extended:false}));
 
 app.use(bodyParser.json());
+
+//routes
 
 app.use('/user/login', userloginRoute);
 app.use('/user/register', userregisterRoute);
@@ -21,13 +26,12 @@ app.use((req,res,next)=>{
     if (token){
         jwt.verify(token,process.env.SECRET,(err,decoded)=>{
             if (err){
-                res.status(403),json({
+                res.status(403).json({
                     success:false,
                     message:"Invalid Token supplied"
                 })
             }else{
                 req.decoded=decoded;
-                console.log(decoded);
                 next();
             }
         })
@@ -38,10 +42,15 @@ app.use((req,res,next)=>{
     }
 });
 
-
 app.use('/property', require("./routes/propertylist/getProperty"));
 
 app.use('/user/property', require("./routes/user/propertylist"));
+
+
+//static images folder
+app.use('/images', express.static('./images'));
+
+//listen
 
 app.listen(port, ()=>{
     console.log(`App listening at port: ${port}`);
