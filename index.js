@@ -44,8 +44,17 @@ app.use((req,res,next)=>{
 
 app.use('/property', require("./routes/propertylist/getProperty"));
 
+app.use('/like', require("./routes/like"));
+
+app.use('/user', require("./routes/user/contact"));
+
 app.use('/user/property', require("./routes/user/propertylist"));
 
+//for search router
+app.use('/search/property', require("./routes/search/search"));
+
+//for favourites router
+app.use('/favourite', require("./routes/favourite"));
 
 //static images folder
 app.use('/images', express.static('./images'));
@@ -55,4 +64,5 @@ app.use('/images', express.static('./images'));
 app.listen(port, ()=>{
     console.log(`App listening at port: ${port}`);
 })
+
 

@@ -15,30 +15,28 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   return queryInterface.bulkInsert("Users",[
+   await queryInterface.bulkInsert("Users",[
      {
-       firstName:"Samyam",
-       lastName:"Dhamala",
+       firstName:"Junil",
+       lastName:"Maharjan",
        phoneNumber:"9841676756",
-       email:"samyamdhamala11@gmail.com",
-       password:bcrypt.hashSync("samyam",salt),
-       role:"buyer",
+       role:"admin",
+       email:"maharjan2@gmail.com",
+       password:bcrypt.hashSync("junil123.",salt),
        createdAt:moment().format("YYYY-MM-DD hh:mm:ss"),
        updatedAt:moment().format("YYYY-MM-DD hh:mm:ss")
+     }, 
+   ]);
 
-     },
-     {
-      firstName:"Bishesh",
-      lastName:"Dangol",
-      phoneNumber:"9841676753",
-      email:"bisheshdangol@gmail.com",
-      password:bcrypt.hashSync("bishesh",salt),
-      role:"seller",
+   await queryInterface.bulkInsert("Admins",[
+    {
+      id:12,
+      position:"manager",
+      status:true,
       createdAt:moment().format("YYYY-MM-DD hh:mm:ss"),
       updatedAt:moment().format("YYYY-MM-DD hh:mm:ss")
-
-    }
-   ])
+    }, 
+  ]);
   },
 
   down: async (queryInterface, Sequelize) => {

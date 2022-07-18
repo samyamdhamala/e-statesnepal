@@ -13,14 +13,18 @@ module.exports = {
         references:{
           model:"Customers",
           key:"id"
-      }
+      },
+      onUpdate:"cascade",
+      onDelete:"cascade"
       },
       property_id: {
         type: Sequelize.INTEGER,
         references:{
           model:"propertylists",
           key:"id"
-      }
+      },
+      onUpdate:"cascade",
+      onDelete:"cascade"
       },
       createdAt: {
         allowNull: false,
